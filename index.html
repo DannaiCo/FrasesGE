@@ -9,15 +9,16 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      width: 1793px;
-      height: 2051px;
+      width: 100vw;   /* 👈 en lugar de pixeles fijos */
+      height: 100vh;
+      background-color: #ffffff;
       font-family: 'Fredoka', sans-serif;
     }
 
     .contenedor {
       position: relative;
-      width: 1793px;
-      height: 2051px;
+      width: 100vw;   /* 👈 siempre toda la pantalla */
+      height: 100vh;
     }
 
     video#fondoVideo {
@@ -26,7 +27,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill; /* 👈 aquí el fill */
+      object-fit: fill; /* 👈 aquí sí se estira */
       z-index: 0;
     }
 
@@ -38,7 +39,7 @@
       width: 78%;
       max-width: 885px;
       text-align: center;
-      font-size: 100px; /* tamaño grande para esta resolución */
+      font-size: 100px;
       line-height: 1.1;
       font-weight: 500;
       color: #f7ccbc;
@@ -95,4 +96,6 @@
 </script>
 </body>
 </html>
+
+
 
