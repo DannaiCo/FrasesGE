@@ -2,101 +2,137 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Amor y Amistad</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <title>Fin de Año</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500&display=swap" rel="stylesheet">
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       overflow: hidden;
-      width: 100vw;   /* 👈 en lugar de pixeles fijos */
+      width: 100vw;
       height: 100vh;
-      background-color: #ffffff;
-      font-family: 'Fredoka', sans-serif;
+      background: #000;
     }
 
-    .contenedor {
+    /* 🔥 CONTENEDOR FULLSCREEN REAL */
+    .contenedor-total {
       position: relative;
-      width: 100vw;   /* 👈 siempre toda la pantalla */
+      width: 100vw;
       height: 100vh;
+      overflow: hidden;
     }
 
-    video#fondoVideo {
+    /* 🎥 VIDEO AJUSTADO A LA PANTALLA */
+    video#fondo {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: fill; /* 👈 aquí sí se estira */
+      object-fit: fill; /* 🔥 IGUAL QUE EN TU OTRO PROYECTO */
       z-index: 0;
     }
 
-    .frase {
+    /* 📝 FRASE (se mantiene igual en proporciones relativas) */
+    .contenedor-frase {
       position: absolute;
-      top: 40%;
+      top: 44%;  /* Ajusté para que respete la proporción original */
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: 78%;
-      max-width: 1000px;
+      transform: translateX(-50%);
+      width: 70%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
       text-align: center;
-      font-size: 100px;
-      line-height: 1.1;
-      font-weight: 500;
-      color: #f7ccbc;
-      font-family: 'Fredoka', sans-serif;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      white-space: normal;
     }
 
-    .mostrar {
-      opacity: 1;
+    #frase {
+      font-size: 6vw; /* escala proporcional */
+      color:white;
+      font-family: "Archivo", sans-serif;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+
+    /* ⏳ CONTADOR */
+    .contador {
+      position: absolute;
+      bottom: 8vh;
+      width: 100%;
+      text-align: center;
+      font-size: 6vw;
+      font-family: "Anton", sans-serif;
+      color: #2231dc;
+      z-index: 1;
     }
   </style>
 </head>
+
 <body>
-  <div class="contenedor">
-    <video autoplay muted loop playsinline id="fondoVideo">
+  <div class="contenedor-total">
+
+    <!-- 🎥 Fondo -->
+    <video id="fondo" autoplay muted loop playsinline>
       <source src="fondo.mp4" type="video/mp4">
-      Cargando.
     </video>
 
-    <div class="frase" id="frase"></div>
+    <!-- 📝 Frase -->
+    <div class="contenedor-frase">
+      <div id="frase">Cargando frase...</div>
+    </div>
+
+    <!-- ⏳ Contador -->
+    <div class="contador" id="contador"></div>
   </div>
 
 <script>
-  const url = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiQGpJV4w1hZqhfJBMvtp3nh-IvO7Enpmfi-NuDvgjmE3g5tShtQyIPpROXDeEdRPVg66pP9jBgTaNMUN_aiWpTEKE8md5Xuda25qKcj-ITSRwCw5qvF_OO1MYp0bSr-k8SB1N8uuxy4cK7n96McNbz5SuSVlSWwfONs_MHuat_WuqK6_32XH_0HT1SRUAesrKvFREVYPLsEwdGVFaBNaXJQo60JSTu6d82h1I7R3Qb3MIiCrAfuRq_rpirSwXKuTS8VtaCDNtaELWSPJtCjGNGX-R2XpDJduQnxJy5&lib=MKcE4wsyGQpW6RnsP8GhHoaeEHa1C_Htb";
+  const frases = [
+    "Prometiste dormir más… pero ver hacks de limpieza a las 3 a.m. era más urgente.",
+    "Prometiste que aprenderías inglés… pero aún traduces todo en Google.",
+    "Prometiste que comerías mejor… El buñuelo no cuenta, pero inténtalo.",
+    "Prometiste que harías más ejercicio… te queda 1 mes para empezar.",
+    "Prometiste ahorrar más… $20.000 pueden ser el inicio o un almuerzo.",
+    "Prometiste bajar 10 kilos… hasta que apareció el pan de bono.",
+    "Prometiste que leerías 12 libros… vas en 3, pero todavía vale.",
+    "Prometiste que harías más ejercicio… si le pones el cardio en x2, aún alcanzas.",
+  ];
 
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      const frases = data.mensajes;
-      const el = document.getElementById("frase");
+  let index = 0;
+  const elemento = document.getElementById("frase");
 
-      function mostrarFrase() {
-        const aleatoria = frases[Math.floor(Math.random() * frases.length)];
-        let texto = aleatoria.toLowerCase();
-        el.innerText = texto.charAt(0).toUpperCase() + texto.slice(1);
-        el.classList.add("mostrar");
-      }
+  function cambiarFrase() {
+    elemento.textContent = frases[index];
+    index = (index + 1) % frases.length;
+  }
 
-      mostrarFrase();
+  cambiarFrase();
+  setInterval(cambiarFrase, 10000);
 
-      setInterval(() => {
-        el.classList.remove("mostrar");
-        setTimeout(mostrarFrase, 500);
-      }, 5000);
-    })
-    .catch(err => {
-      console.error("Error cargando frases:", err);
-      document.getElementById("frase").innerText = "Error al cargar frase";
-    });
+  /* 🕒 COUNTDOWN */
+  const contador = document.getElementById("contador");
+  const fechaFin = new Date("December 31, 2025 23:59:59").getTime();
+
+  function actualizarContador() {
+    const ahora = new Date().getTime();
+    const diferencia = fechaFin - ahora;
+
+    if (diferencia <= 0) {
+      contador.textContent = "¡Feliz Año Nuevo! 🎉";
+      return;
+    }
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    contador.innerHTML = `${dias}<br>días`;
+  }
+
+  actualizarContador();
+  setInterval(actualizarContador, 1000);
 </script>
+
 </body>
 </html>
-
-
-
-
