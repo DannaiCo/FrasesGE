@@ -1,100 +1,117 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>semanasanta</title>
+<head>
+<meta charset="UTF-8">
+<title>Semana Santa</title>
 
-    <!-- Fuente correcta -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet" />
+<meta name="viewport" content="width=1793, initial-scale=1.0">
 
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width: 100vw;
-        height: 100vh;
-        background: #000;
-      }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 
-      /* 🔥 CONTENEDOR FULLSCREEN REAL */
-      .contenedor-total {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-      }
+<style>
 
-      /* 🎥 VIDEO AJUSTADO A LA PANTALLA */
-      video#fondo {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: fill; /* 🔥 IGUAL QUE EN TU OTRO PROYECTO */
-        z-index: 0;
-      }
+html,body{
+margin:0;
+padding:0;
+overflow:hidden;
+background:black;
+}
 
-      .contenedor-frase {
-        position: absolute;
-        top: 35%; /* Ajusté para que respete la proporción original */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 47%;
-        height: 46%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1;
-        text-align: center;
-      }
+/* ESCENARIO REAL */
+.escenario{
+position:absolute;
+width:1793px;
+height:2051px;
+}
 
-      #frase {
-        font-size: 5vw; /* escala proporcional */
-        color: white;
-        font-family: "Dela Gothic One", sans-serif;
-        letter-spacing: 2px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="contenedor-total" id="contenedor">
-      <video id="fondo" autoplay muted loop playsinline>
-        <source src="fondo.mp4" type="video/mp4" />
-      </video>
+/* VIDEO */
+video#fondo{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:0;
+}
 
-      <div class="contenedor-frase">
-        <div id="frase">Cargando frase...</div>
-      </div>
-    </div>
+/* ZONA DE CONTENIDO */
+.zona{
+position:absolute;
 
-    <script>
-      const frases = [
-        "Aún estás a tiempo de empezar de nuevo.",
-        "Perdonar también te libera.",
-        "Agradecer cambia el día.",
-        "Alguien necesita tu ayuda hoy.",
-        "Una palabra amable cambia el día.",
-        "Hoy puedes elegir la calma.",
-        "Lo simple también transforma.",
-        "Ayudar también te cambia.",
-        "Un momento de silencio ayuda."
-      ];
+width: 868px; /* zona segura centrada */
+height:953px;
 
-      const elemento = document.getElementById("frase");
+top:58%;
+left:50%;
 
-      function cambiarFrase() {
-        const randomIndex = Math.floor(Math.random() * frases.length);
-        elemento.textContent = frases[randomIndex];
-      }
+transform:translate(-50%,-50%);
 
-      cambiarFrase();
-      setInterval(cambiarFrase, 10000);
-    </script>
-  </body>
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+
+z-index:2;
+}
+
+/* TEXTO */
+#frase{
+
+font-size:110px; /* tamaño controlado */
+color:white;
+
+font-family:"Dela Gothic One", sans-serif;
+
+letter-spacing:4px;
+
+line-height:1.2;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="escenario">
+
+<video autoplay muted loop playsinline id="fondo">
+<source src="fondo.mp4" type="video/mp4">
+</video>
+
+<div class="zona">
+<div id="frase">Cargando frase...</div>
+</div>
+
+</div>
+
+<script>
+
+const frases = [
+"Aún estás a tiempo de empezar de nuevo.",
+"Perdonar también te libera.",
+"Agradecer cambia el día.",
+"Alguien necesita tu ayuda hoy.",
+"Una palabra amable cambia el día.",
+"Hoy puedes elegir la calma.",
+"Lo simple también transforma.",
+"Ayudar también te cambia.",
+"Un momento de silencio ayuda."
+];
+
+const el = document.getElementById("frase");
+
+function cambiarFrase(){
+const i = Math.floor(Math.random()*frases.length);
+el.textContent = frases[i];
+}
+
+cambiarFrase();
+setInterval(cambiarFrase,10000);
+
+</script>
+
+</body>
 </html>
