@@ -1,138 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Fin de Año</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>semanasanta</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500&display=swap" rel="stylesheet">
+    <!-- Fuente correcta -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet" />
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      width: 100vw;
-      height: 100vh;
-      background: #000;
-    }
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: #000;
+        width: 100%;
+        height: 100%;
+      }
 
-    /* 🔥 CONTENEDOR FULLSCREEN REAL */
-    .contenedor-total {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
+      .contenedor-total {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
 
-    /* 🎥 VIDEO AJUSTADO A LA PANTALLA */
-    video#fondo {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: fill; /* 🔥 IGUAL QUE EN TU OTRO PROYECTO */
-      z-index: 0;
-    }
+      video#fondo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: fill; /* 🔥 IGUAL QUE EN TU OTRO PROYECTO */
+        z-index: 0;
+      }
 
-    /* 📝 FRASE (se mantiene igual en proporciones relativas) */
-    .contenedor-frase {
-      position: absolute;
-      top: 44%;  /* Ajusté para que respete la proporción original */
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
-      text-align: center;
-    }
+      .contenedor-frase {
+        position: absolute;
+        top: 794px;
+        left: 474px;
+        width: 841px;
+        height: 800px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+      }
 
-    #frase {
-      font-size: 6vw; /* escala proporcional */
-      color:white;
-      font-family: "Archivo", sans-serif;
-      font-weight: 500;
-      letter-spacing: 2px;
-    }
+      #frase {
+        font-size: 110px;
+        color: white;
+        font-family: "Dela Gothic One", sans-serif;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor-total" id="contenedor">
+      <video id="fondo" autoplay muted loop playsinline>
+        <source src="fondo.mp4" type="video/mp4" />
+      </video>
 
-    /* ⏳ CONTADOR */
-    .contador {
-      position: absolute;
-      bottom: 8vh;
-      width: 100%;
-      text-align: center;
-      font-size: 6vw;
-      font-family: "Anton", sans-serif;
-      color: #2231dc;
-      z-index: 1;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="contenedor-total">
-
-    <!-- 🎥 Fondo -->
-    <video id="fondo" autoplay muted loop playsinline>
-      <source src="fondo.mp4" type="video/mp4">
-    </video>
-
-    <!-- 📝 Frase -->
-    <div class="contenedor-frase">
-      <div id="frase">Cargando frase...</div>
+      <div class="contenedor-frase">
+        <div id="frase">Cargando frase...</div>
+      </div>
     </div>
 
-    <!-- ⏳ Contador -->
-    <div class="contador" id="contador"></div>
-  </div>
+    <script>
+      const frases = [
+        "Aún estás a tiempo de empezar de nuevo.",
+        "Perdonar también te libera.",
+        "Agradecer cambia el día.",
+        "Alguien necesita tu ayuda hoy.",
+        "Una palabra amable cambia el día.",
+        "Hoy puedes elegir la calma.",
+        "Lo simple también transforma.",
+        "Ayudar también te cambia.",
+        "Un momento de silencio ayuda."
+      ];
 
-<script>
-  const frases = [
-    "Prometiste dormir más… pero ver hacks de limpieza a las 3 a.m. era más urgente.",
-    "Prometiste que aprenderías inglés… pero aún traduces todo en Google.",
-    "Prometiste que comerías mejor… El buñuelo no cuenta, pero inténtalo.",
-    "Prometiste que harías más ejercicio… te queda 1 mes para empezar.",
-    "Prometiste ahorrar más… $20.000 pueden ser el inicio o un almuerzo.",
-    "Prometiste bajar 10 kilos… hasta que apareció el pan de bono.",
-    "Prometiste que leerías 12 libros… vas en 3, pero todavía vale.",
-    "Prometiste que harías más ejercicio… si le pones el cardio en x2, aún alcanzas.",
-  ];
+      const elemento = document.getElementById("frase");
 
-  let index = 0;
-  const elemento = document.getElementById("frase");
+      function cambiarFrase() {
+        const randomIndex = Math.floor(Math.random() * frases.length);
+        elemento.textContent = frases[randomIndex];
+      }
 
-  function cambiarFrase() {
-    elemento.textContent = frases[index];
-    index = (index + 1) % frases.length;
-  }
+      cambiarFrase();
+      setInterval(cambiarFrase, 10000);
 
-  cambiarFrase();
-  setInterval(cambiarFrase, 10000);
+      function escalarPantalla() {
+        const escalaX = window.innerWidth / 1793;
+        const escalaY = window.innerHeight / 2051;
+        const escala = Math.min(escalaX, escalaY);
+        document.getElementById("contenedor").style.transform = `scale(${escala})`;
+      }
 
-  /* 🕒 COUNTDOWN */
-  const contador = document.getElementById("contador");
-  const fechaFin = new Date("December 31, 2025 23:59:59").getTime();
-
-  function actualizarContador() {
-    const ahora = new Date().getTime();
-    const diferencia = fechaFin - ahora;
-
-    if (diferencia <= 0) {
-      contador.textContent = "¡Feliz Año Nuevo! 🎉";
-      return;
-    }
-
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    contador.innerHTML = `${dias}<br>días`;
-  }
-
-  actualizarContador();
-  setInterval(actualizarContador, 1000);
-</script>
-
-</body>
+      window.addEventListener("resize", escalarPantalla);
+      escalarPantalla();
+    </script>
+  </body>
 </html>
