@@ -15,40 +15,42 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
+        width: 100vw;
+        height: 100vh;
         background: #000;
-        width: 100%;
-        height: 100%;
       }
 
+      /* 🔥 CONTENEDOR FULLSCREEN REAL */
       .contenedor-total {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* 🎥 VIDEO AJUSTADO A LA PANTALLA */
+      video#fondo {
         position: absolute;
         top: 0;
         left: 0;
-        width: 1793px;
-        height: 2051px;
-        transform-origin: top left;
-      }
-
-      video#fondo {
-       position: absolute;
-        top: 0;
-        left: 0;
-        width: 1793px;
-        height: 2051px;
-        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-fit: fill; /* 🔥 IGUAL QUE EN TU OTRO PROYECTO */
         z-index: 0;
       }
 
       .contenedor-frase {
         position: absolute;
-        top: 794px;
-        left: 474px;
-        width: 841px;
-        height: 800px;
+        top: 35%; /* Ajusté para que respete la proporción original */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 47%;
+        height: 46%;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         z-index: 1;
+        text-align: center;
       }
 
       #frase {
@@ -93,13 +95,6 @@
 
       cambiarFrase();
       setInterval(cambiarFrase, 10000);
-
-      function escalarPantalla() {
-        const escalaX = window.innerWidth / 1793;
-        const escalaY = window.innerHeight / 2051;
-        const escala = Math.min(escalaX, escalaY);
-        document.getElementById("contenedor").style.transform = `scale(${escala})`;
-      }
 
       window.addEventListener("resize", escalarPantalla);
       escalarPantalla();
