@@ -13,104 +13,62 @@
       body {
         margin: 0;
         padding: 0;
-        width: 1793px;
-        height: 2051px;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
-        background: red;
-      }
-      .escenario {
-        position: absolute;
-        width: 1793px;
-        height: 2051px;
+        background: blue;
       }
 
       .contenedor-total {
         position: relative;
-        width: 1793px;
-        height: 2051px;
-        overflow: hidden;
-      }
-
-      video {
-        position: absolute;
-        top: 0;
-        left: 0;
-
         width: 100%;
         height: 100%;
+      }
 
-        object-fit: cover;
-
+      /* VIDEO FULL REAL */
+      video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
         z-index: 0;
       }
 
+      /* TEXTO */
       .contenedor-frase {
         position: absolute;
 
-        top: 919px; /* AJUSTA VISUALMENTE */
+        top: 58%;
         left: 50%;
 
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
+        align-content: center;
+        width: 841px;
+        height: 800px;
 
-        width: 844px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        z-index: 2;
-      }
-
-      #frase {
-        font-size: 130px; /* escala proporcional */
-        color: white;
         text-align: center;
+        z-index: 10;
+      }
+      #frase {
+        font-size: 140px;
+        color: white; /* 🔥 prueba visible */
         font-family: "Archivo", sans-serif;
-        font-weight: 500;
-        letter-spacing: 2px;
       }
     </style>
   </head>
 
   <body>
-    <div class="escenario">
+    <div class="contenedor-total">
       <video autoplay muted loop playsinline>
         <source src="fondo.mp4" />
       </video>
 
       <div class="contenedor-frase">
-        <div id="frase"></div>
+        <div id="frase">texto fijo</div>
       </div>
     </div>
 
     <script>
-      function escalar() {
-        const baseW = 1793;
-        const baseH = 2051;
-
-        const screenW = window.innerWidth;
-        const screenH = window.innerHeight;
-
-        const scaleX = screenW / baseW;
-        const scaleY = screenH / baseH;
-
-        const scale = Math.min(scaleX, scaleY);
-
-        const escenario = document.querySelector(".escenario");
-
-        escenario.style.transform = `scale(${scale})`;
-
-        // 🔥 CENTRADO REAL (esto es lo que te faltaba)
-        const offsetX = (screenW - baseW * scale) / 2;
-        const offsetY = (screenH - baseH * scale) / 2;
-
-        escenario.style.left = offsetX + "px";
-        escenario.style.top = offsetY + "px";
-      }
-
-      window.addEventListener("resize", escalar);
-      escalar();
-
       const frases = [
         "Aún estás a tiempo de empezar de nuevo.",
         "Perdonar también te libera.",
