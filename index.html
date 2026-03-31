@@ -22,9 +22,6 @@
         position: absolute;
         width: 1793px;
         height: 2051px;
-        top: 0;
-        left: 0;
-        transform-origin: top left;
       }
 
       .contenedor-total {
@@ -91,12 +88,24 @@
         const baseW = 1793;
         const baseH = 2051;
 
-        const scaleX = window.innerWidth / baseW;
-        const scaleY = window.innerHeight / baseH;
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+
+        const scaleX = screenW / baseW;
+        const scaleY = screenH / baseH;
 
         const scale = Math.min(scaleX, scaleY);
 
-        document.querySelector(".escenario").style.transform = `scale(${scale})`;
+        const escenario = document.querySelector(".escenario");
+
+        escenario.style.transform = `scale(${scale})`;
+
+        // 🔥 CENTRADO REAL (esto es lo que te faltaba)
+        const offsetX = (screenW - baseW * scale) / 2;
+        const offsetY = (screenH - baseH * scale) / 2;
+
+        escenario.style.left = offsetX + "px";
+        escenario.style.top = offsetY + "px";
       }
 
       window.addEventListener("resize", escalar);
