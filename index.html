@@ -50,12 +50,12 @@
       .contenedor-frase {
         position: absolute;
 
-        top: 900px; /* AJUSTA VISUALMENTE */
+        top: 919px; /* AJUSTA VISUALMENTE */
         left: 50%;
 
         transform: translateX(-50%);
 
-        width: 900px;
+        width: 844px;
 
         display: flex;
         justify-content: center;
@@ -94,7 +94,7 @@
         const scaleX = window.innerWidth / baseW;
         const scaleY = window.innerHeight / baseH;
 
-        const scale = Math.max(scaleX, scaleY);
+        const scale = Math.min(scaleX, scaleY);
 
         document.querySelector(".escenario").style.transform = `scale(${scale})`;
       }
