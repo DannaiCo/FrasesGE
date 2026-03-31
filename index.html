@@ -19,35 +19,39 @@
         background: red;
       }
 
-      /* 🔥 CONTENEDOR FULLSCREEN REAL */
-    .contenedor-total {
-  position: relative;
-  width: 1793px;
-  height: 2051px;
-  overflow: hidden;
-}
+      .contenedor-total {
+        position: relative;
+        width: 1793px;
+        height: 2051px;
+        overflow: hidden;
+      }
 
-      /* 🎥 VIDEO AJUSTADO A LA PANTALLA */
       video {
         position: absolute;
         top: 0;
         left: 0;
+
         width: 1793px;
         height: 2051px;
-        object-fit: cover; /* 🔥 ya no fill */
+
+        object-fit: cover;
       }
 
-      /* 📝 FRASE (se mantiene igual en proporciones relativas) */
       .contenedor-frase {
         position: absolute;
-        top: 34%; /* Ajusté para que respete la proporción original */
+
+        top: 886px;
         left: 50%;
+
         transform: translateX(-50%);
-        width: 46%;
-        height: 48%;
+
+        width: 800px;
+        height: 600px;
+
         display: flex;
         justify-content: center;
         align-items: center;
+
         z-index: 1;
         text-align: center;
       }
