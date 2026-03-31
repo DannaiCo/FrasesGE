@@ -18,6 +18,14 @@
         overflow: hidden;
         background: red;
       }
+      .escenario {
+        position: absolute;
+        width: 1793px;
+        height: 2051px;
+        top: 0;
+        left: 0;
+        transform-origin: top left;
+      }
 
       .contenedor-total {
         position: relative;
@@ -31,29 +39,29 @@
         top: 0;
         left: 0;
 
-        width: 1793px;
-        height: 2051px;
+        width: 100%;
+        height: 100%;
 
         object-fit: cover;
+
+        z-index: 0;
       }
 
       .contenedor-frase {
         position: absolute;
 
-        top: 886px;
+        top: 900px; /* AJUSTA VISUALMENTE */
         left: 50%;
 
         transform: translateX(-50%);
 
-        width: 800px;
-        height: 600px;
+        width: 900px;
 
         display: flex;
         justify-content: center;
         align-items: center;
 
-        z-index: 1;
-        text-align: center;
+        z-index: 2;
       }
 
       #frase {
@@ -83,6 +91,21 @@
     </div>
 
     <script>
+      function escalar() {
+        const baseW = 1793;
+        const baseH = 2051;
+
+        const scaleX = window.innerWidth / baseW;
+        const scaleY = window.innerHeight / baseH;
+
+        const scale = Math.max(scaleX, scaleY);
+
+        document.querySelector(".escenario").style.transform = `scale(${scale})`;
+      }
+
+      window.addEventListener("resize", escalar);
+      escalar();
+
       const frases = [
         "Aún estás a tiempo de empezar de nuevo.",
         "Perdonar también te libera.",
