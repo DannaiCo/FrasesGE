@@ -36,19 +36,22 @@
 
       /* TEXTO */
       .contenedor-frase {
-        position: relative;
-        top: 40%;
-        left: 26%;
+        position: absolute;
+
+        top: 22%;
+        left: 37%;
+
+        transform: translate(-50%, -50%);
         align-content: center;
-        width: 843px;
+        width: 1000px;
         height: 800px;
+        transform: scaleY(0.4); /* 🔥 AJUSTA ESTE VALOR */
+
+        text-align: center;
         z-index: 10;
       }
       #frase {
-        text-align: center;
-        transform: scaleY(0.4); /* 🔥 AJUSTA ESTE VALOR */
-        transform: scaleX(0.8); /* 🔥 AJUSTA ESTE VALOR */
-        font-size: 130px;
+        font-size: 200px;
         line-height: 1.5;
         letter-spacing: 5px;
         font-weight: 500;
