@@ -75,19 +75,14 @@
   </head>
 
   <body>
-    <div class="contenedor-total">
-      <!-- 🎥 Fondo -->
-      <video id="fondo" autoplay muted loop playsinline>
-        <source src="fondo.mp4" type="video/mp4" />
+    <div class="escenario">
+      <video autoplay muted loop playsinline>
+        <source src="fondo.mp4" />
       </video>
 
-      <!-- 📝 Frase -->
       <div class="contenedor-frase">
-        <div id="frase">Cargando frase...</div>
+        <div id="frase"></div>
       </div>
-
-      <!-- ⏳ Contador -->
-      <div class="contador" id="contador"></div>
     </div>
 
     <script>
