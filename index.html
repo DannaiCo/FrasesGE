@@ -144,17 +144,27 @@ setInterval(actualizarContador, 60000);
 
 /* ESCALADO */
 
-function escalarPantalla() {
-  const escalaX = window.innerWidth / 1793;
-  const escalaY = window.innerHeight / 2051;
-  const escala = Math.min(escalaX, escalaY);
+ffunction escalarPantalla() {
+  const baseWidth = 1793;
+  const baseHeight = 2051;
 
-  document.getElementById("contenedor")
-    .style.transform = `scale(${escala})`;
+  const escalaX = window.innerWidth / baseWidth;
+  const escalaY = window.innerHeight / baseHeight;
+
+  // 👇 CAMBIO A FILL
+  const escala = Math.max(escalaX, escalaY);
+
+  const contenedor = document.getElementById("contenedor");
+
+  contenedor.style.transform = `scale(${escala})`;
+
+  // 👇 CENTRAR (esto corrige que se vaya a la derecha)
+  const offsetX = (window.innerWidth - baseWidth * escala) / 2;
+  const offsetY = (window.innerHeight - baseHeight * escala) / 2;
+
+  contenedor.style.left = `${offsetX}px`;
+  contenedor.style.top = `${offsetY}px`;
 }
-
-window.addEventListener("resize", escalarPantalla);
-escalarPantalla();
 
 </script>
 </body>
