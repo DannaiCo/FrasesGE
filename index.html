@@ -1,98 +1,161 @@
-<!doctype html>
+<!DOCTYPE html> 
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Semana Santa</title>
+<head>
+  <meta charset="UTF-8">
+  <title>fin de año</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://use.typekit.net/vsp7vcb.css" />
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background: blue;
-      }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Open+Sans:ital,wght@1,600&display=swap" rel="stylesheet">
 
-      .contenedor-total {
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      width: 100%;
+      height: 100%;
+    }
 
-      /* VIDEO FULL REAL */
-      video {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-        z-index: 0;
-      }
+    .contenedor-total {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1793px;
+      height: 2051px;
+      transform-origin: top left;
+    }
 
-      /* TEXTO */
-      .contenedor-frase {
-        position: absolute;
-        top: -10%;
-        left: 30%;
-        transform: translate(-50%, -50%);
-        align-content: center;
-        width: 1500px;
-        height: 2000px;
-        transform: scaleY(0.4); /* 🔥 AJUSTA ESTE VALOR */
-        text-align: center;
-        z-index: 10;
-      }
-      #frase {
-        font-size: 200px;
-        line-height: 1.3;
-        letter-spacing: 5px;
-        font-weight: 500;
-        color: white; /* 🔥 prueba visible */
-        font-family: "kit-rounded", sans-serif;
-        font-weight: 900;
-        font-style: normal;
-      }
-    </style>
-  </head>
+    video#fondo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1793px;
+      height: 2051px;
+      object-fit: cover;
+      z-index: 0;
+    }
 
-  <body>
-    <div class="contenedor-total">
-      <video autoplay muted loop playsinline>
-        <source src="fondo.mp4" />
-      </video>
+    .contenedor-frase {
+      position: absolute;
+      top: 1295px;
+      left: 559px;
+      width: 737px;
+      height: 29px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0);
+      z-index: 1;
+    }
 
-      <div class="contenedor-frase">
-        <div id="frase">texto fijo</div>
-      </div>
+    #frase {
+      font-size: 105px;
+      color: white;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 100px;
+      font-style: italic;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .contador {
+      position: absolute;
+      bottom: 1113px;
+      left: 91px;
+      width: 89%;
+      text-align: center;
+      font-size: 153px;
+      font-family: "Dela Gothic One", sans-serif;
+      font-weight: 400;
+      color: #012BFF;
+      line-height: 1;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contenedor-total" id="contenedor">
+
+    <video id="fondo" autoplay muted loop playsinline>
+      <source src="fondo.mp4" type="video/mp4">
+    </video>
+
+    <div class="contenedor-frase">
+      <div id="frase">Cargando frase...</div>
     </div>
 
-    <script>
-      const frases = [
-        "Aún estás a tiempo de empezar de nuevo.",
-        "Perdonar también te libera.",
-        "Agradecer cambia el día.",
-        "Alguien necesita tu ayuda hoy.",
-        "Una palabra amable cambia el día.",
-        "Hoy puedes elegir la calma.",
-        "Lo simple también transforma.",
-        "Ayudar también te cambia.",
-        "Un momento de silencio ayuda."
-      ];
+    <div class="contador" id="contador"></div>
+  </div>
 
-      let index = 0;
-      const elemento = document.getElementById("frase");
+<script>
 
-      function cambiarFrase() {
-        elemento.textContent = frases[index];
-        index = (index + 1) % frases.length;
-      }
+/* FRASES */
 
-      cambiarFrase();
-      setInterval(cambiarFrase, 5000);
-    </script>
-  </body>
+const frases = [
+  "Para: Cantar goles con extraños",
+  "Para: No lavar la camiseta",
+  "Para: Sufrir juntos cada partido",
+  "Para: Vivir 90 min eternos",
+  "Para: Gritarle a la pantalla",
+  "Para: Celebrar como nunca",
+  "Para: Sentirse técnico"
+];
+
+let index = 0;
+const elemento = document.getElementById("frase");
+
+function cambiarFrase() {
+  elemento.textContent = frases[index];
+  index = (index + 1) % frases.length;
+}
+
+cambiarFrase();
+setInterval(cambiarFrase, 5000);
+
+
+/* CONTADOR */
+
+const contador = document.getElementById("contador");
+const fechaMundial = new Date(2026, 5, 11).getTime();
+
+function actualizarContador() {
+
+  const ahora = new Date().getTime();
+  const diferencia = fechaMundial - ahora;
+
+  if (diferencia <= 0) {
+    contador.innerHTML = "HOY INICIA EL MUNDIAL";
+    return;
+  }
+
+  const dias = Math.ceil(
+    diferencia / (1000 * 60 * 60 * 24)
+  );
+
+  contador.innerHTML = dias +  "&nbsp;DÍAS";
+}
+
+actualizarContador();
+setInterval(actualizarContador, 60000);
+
+
+/* ESCALADO */
+
+function escalarPantalla() {
+  const escalaX = window.innerWidth / 1793;
+  const escalaY = window.innerHeight / 2051;
+  const escala = Math.min(escalaX, escalaY);
+
+  document.getElementById("contenedor")
+    .style.transform = `scale(${escala})`;
+}
+
+window.addEventListener("resize", escalarPantalla);
+escalarPantalla();
+
+</script>
+</body>
 </html>
