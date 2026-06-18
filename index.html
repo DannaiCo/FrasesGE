@@ -1,171 +1,268 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>fin de año</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Open+Sans:ital,wght@1,600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #000;
-      width: 100%;
-      height: 100%;
-    }
+<title>Día del Padre - iCo Medios</title>
 
-    .contenedor-total {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 1793px;
-      height: 2051px;
-      transform-origin: top left;
-    }
+<link rel="stylesheet" href="https://use.typekit.net/vsp7vcb.css">
 
-    video#fondo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* llena sin deformar */
-  transform: translate(-50%, -50%); /* 🔥 centra correctamente */
-  z-index: 0;
+<style>
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
 }
-    .contenedor-frase {
-      position: absolute;
-      top: 1295px;
-      left: 559px;
-      width: 737px;
-      height: 29px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(255, 255, 255, 0);
-      z-index: 1;
-    }
 
-    #frase {
-      font-size: 105px;
-      color: white;
-      font-family: "Open Sans", sans-serif;
-      font-weight: 100px;
-      font-style: italic;
-      letter-spacing: 2px;
-      text-align: center;
-    }
+.contenedor{
 
-    .contador {
-      position: absolute;
-      bottom: 1113px;
-      left: 91px;
-      width: 89%;
-      text-align: center;
-      font-size: 153px;
-      font-family: "Dela Gothic One", sans-serif;
-      font-weight: 400;
-      color: #012BFF;
-      line-height: 1;
-      z-index: 2;
-    }
-  </style>
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+}
+
+/* VIDEO DE FONDO */
+
+#fondoVideo{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:fill;
+
+    z-index:0;
+}
+
+/* CONTENIDO */
+
+#contenido{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    z-index:10;
+}
+
+/* MENSAJE */
+
+.mensaje{
+
+    position:absolute;
+
+    top:28%;
+
+    left:8%;
+
+    width:84%;
+
+    text-align:center;
+
+    font-family:"filson-soft", sans-serif;
+
+    font-weight:700;
+
+    font-style:normal;
+
+    font-size:72px;
+
+    line-height:1.15;
+
+    color:#0000EC;
+
+    transform:scaleY(0.50);
+
+    transform-origin:center center;
+
+    opacity:0;
+
+    transition:opacity .8s ease;
+}
+
+/* NOMBRE PAPÁ */
+
+.papa{
+
+    position:absolute;
+
+    top:70%;
+
+    left:8%;
+
+    width:84%;
+
+    text-align:center;
+
+    font-family:"filson-soft", sans-serif;
+
+    font-weight:700;
+
+    font-style:normal;
+
+    font-size:62px;
+
+    color:#0000EC;
+
+    transform:scaleY(0.50);
+
+    transform-origin:center center;
+
+    opacity:0;
+
+    transition:opacity .8s ease;
+}
+
+.mostrar{
+
+    opacity:1;
+}
+
+</style>
+
 </head>
 
 <body>
-  <div class="contenedor-total" id="contenedor">
 
-    <video id="fondo" autoplay muted loop playsinline>
-      <source src="fondo.mp4" type="video/mp4">
+<div class="contenedor">
+
+    <video autoplay muted loop playsinline id="fondoVideo">
+
+        <source src="fondo.mp4" type="video/mp4">
+
     </video>
 
-    <div class="contenedor-frase">
-      <div id="frase">Cargando frase...</div>
+    <div id="contenido">
+
+        <div class="mensaje"></div>
+
+        <div class="papa"></div>
+
     </div>
 
-    <div class="contador" id="contador"></div>
-  </div>
+</div>
 
 <script>
 
-/* FRASES */
+const API_URL =
+"https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnR9sKMc4V_LT0YpJPKgHrTJdw0886LZpZCfFNDpmgqn_PWAkG04bVDbX9kRZgvbFEqfoXH3m59Qk4I-xa_oOHjfdYnsQVZEZGK-I4CHcEfwd6hcV7aFEe_RcBuls2LkfXbRrxyQ5Z0Ga_0Q4tYTUKnD148IiUGF0u1wOkY2LsiW_5PKXaTSE84s06IXxbrC52CGNkw2ZrPMqT1vigNBDcUHE2P6ld_vTvwYRaKn4lj6FagP0VZjSNexLfGeTOgNPvK-AFa0CvCvWO7wVAbZb8yo0mX2MQ&lib=MLNAcr3Jke4q8WCYQeQbKPKeEHa1C_Htb";
 
-const frases = [
-  "Para: Cantar goles con extraños",
-  "Para: No lavar la camiseta",
-  "Para: Sufrir juntos cada partido",
-  "Para: Vivir 90 min eternos",
-  "Para: Gritarle a la pantalla",
-  "Para: Celebrar como nunca",
-  "Para: Sentirse técnico"
-];
+const elMensaje = document.querySelector(".mensaje");
 
-let index = 0;
-const elemento = document.getElementById("frase");
+const elPapa = document.querySelector(".papa");
 
-function cambiarFrase() {
-  elemento.textContent = frases[index];
-  index = (index + 1) % frases.length;
+async function cargarMensajes(){
+
+    try{
+
+        const response = await fetch(API_URL);
+
+        const data = await response.json();
+
+        if(!data || data.length === 0){
+
+            elPapa.innerText = "";
+
+            elMensaje.innerText = "NO HAY MENSAJES APROBADOS";
+
+            elMensaje.classList.add("mostrar");
+
+            return;
+        }
+
+        let index = 0;
+
+        function mostrarMensaje(){
+
+            const item = data[index];
+
+            elPapa.classList.remove("mostrar");
+
+            elMensaje.classList.remove("mostrar");
+
+            setTimeout(()=>{
+
+                const mensaje = item.mensaje || "";
+
+                if(mensaje.length <= 60){
+
+                    elMensaje.style.fontSize = "72px";
+
+                }else if(mensaje.length <= 100){
+
+                    elMensaje.style.fontSize = "60px";
+
+                }else{
+
+                    elMensaje.style.fontSize = "48px";
+
+                }
+
+                elMensaje.innerText =
+                    `"${mensaje}"`;
+
+                elPapa.innerText =
+                    item.papa
+                    ? item.papa.toUpperCase()
+                    : "";
+
+                elMensaje.classList.add("mostrar");
+
+                elPapa.classList.add("mostrar");
+
+            },300);
+
+            index++;
+
+            if(index >= data.length){
+
+                index = 0;
+            }
+        }
+
+        mostrarMensaje();
+
+        setInterval(mostrarMensaje,5000);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        elPapa.innerText = "";
+
+        elMensaje.innerText =
+            "ERROR CARGANDO MENSAJES";
+
+        elMensaje.classList.add("mostrar");
+
+    }
+
 }
 
-cambiarFrase();
-setInterval(cambiarFrase, 5000);
-
-
-/* CONTADOR */
-
-const contador = document.getElementById("contador");
-const fechaMundial = new Date(2026, 5, 11).getTime();
-
-function actualizarContador() {
-
-  const ahora = new Date().getTime();
-  const diferencia = fechaMundial - ahora;
-
-  if (diferencia <= 0) {
-    contador.innerHTML = "HOY INICIA EL MUNDIAL";
-    return;
-  }
-
-  const dias = Math.ceil(
-    diferencia / (1000 * 60 * 60 * 24)
-  );
-
-  contador.innerHTML = dias +  "&nbsp;DÍAS";
-}
-
-actualizarContador();
-setInterval(actualizarContador, 60000);
-
-
-/* ESCALADO */
-
-ffunction escalarPantalla() {
-  const baseWidth = 1793;
-  const baseHeight = 2051;
-
-  const escalaX = window.innerWidth / baseWidth;
-  const escalaY = window.innerHeight / baseHeight;
-
-  // 👇 CAMBIO A FILL
-  const escala = Math.max(escalaX, escalaY);
-
-  const contenedor = document.getElementById("contenedor");
-
-  contenedor.style.transform = `scale(${escala})`;
-
-  // 👇 CENTRAR (esto corrige que se vaya a la derecha)
-  const offsetX = (window.innerWidth - baseWidth * escala) / 2;
-  const offsetY = (window.innerHeight - baseHeight * escala) / 2;
-
-  contenedor.style.left = `${offsetX}px`;
-  contenedor.style.top = `${offsetY}px`;
-}
+cargarMensajes();
 
 </script>
+
 </body>
+
 </html>
